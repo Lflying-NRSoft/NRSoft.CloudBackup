@@ -1,0 +1,36 @@
+﻿@inherits LayoutComponentBase
+
+<Layout SideWidth="0" IsPage="true" ShowGotoTop="true" ShowCollapseBar="true"
+        IsFullSide="@IsFullSide" IsFixedHeader="@IsFixedHeader" IsFixedFooter="@IsFixedFooter" ShowFooter="@ShowFooter"
+        Menus="@Menus" UseTabSet="@UseTabSet" AdditionalAssemblies="new[] { GetType().Assembly }" class="@Theme">
+    <Header>
+        <span class="ml-3 flex-sm-fill d-none d-sm-block">Bootstrap of Blazor</span>
+        <img src="_content/BootstrapBlazorApp.Shared/images/Argo.png" class="layout-avatar-right" />
+        <span class="mx-3 d-none d-sm-block">超级管理员</span>
+        <div class="layout-drawer" @onclick="@(e => IsOpen = !IsOpen)"><i class="fa fa-gears"></i></div>
+    </Header>
+    <Side>
+        <div class="layout-banner">
+            <img class="layout-logo" src="_content/BootstrapBlazorApp.Shared/images/brand.png" />
+            <div class="layout-title">
+                <span>云备份</span>
+            </div>
+        </div>
+    </Side>
+    <Main>
+        <CascadingValue Value="this" IsFixed="true">
+            @Body
+        </CascadingValue>
+    </Main>
+    <Footer>
+        <div class="text-center flex-fill">
+            <a class="page-layout-demo-footer-link" href="https://gitee.com/LongbowEnterprise/BootstrapAdmin" target="_blank">Bootstrap Admin</a>
+        </div>
+    </Footer>
+</Layout>
+
+<Toast />
+<Dialog />
+<PopoverConfirm />
+<Message />
+<SweetAlert />

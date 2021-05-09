@@ -1,0 +1,12 @@
+﻿@page "/configbackup"
+@using NRSoft.CloudBackup.ConfigBackups
+@inherits CloudBackupComponentBase
+<h3>配置文件列表</h3>
+<Table TItem="ConfigBackupDto" Items="@Items" IsPagination="true" PageItemsSource="@PageItemsSource"
+       IsStriped="true" IsBordered="true" ShowSkeleton="true" IsMultipleSelect="true"
+       ShowToolbar="true" ShowSearch="true" ShowExtendButtons="true"
+       OnQueryAsync="@OnQueryAsync" OnAddAsync="@OnAddAsync" OnSaveAsync="@OnSaveAsync" OnDeleteAsync="@OnDeleteAsync"
+       AutoGenerateColumns="true">
+    <TableColumns>
+    </TableColumns>
+</Table>
