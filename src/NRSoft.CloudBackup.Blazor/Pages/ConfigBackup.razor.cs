@@ -47,11 +47,17 @@ namespace NRSoft.CloudBackup.Blazor.Pages
         /// <returns></returns>
         private async Task<bool> OnSaveAsync(ConfigBackupDto dto)
         {
+            var input = new CreateUpdateConfigBackupDto
+            {
+                Name = dto.Name,
+                Code = dto.Code,
+                Content = dto.Content,
+            };
             // 增加数据演示代码
             if (dto.Id == Guid.Empty)
             {
                 dto.Id = Guid.NewGuid();
-                var result = await ConfigBackupAppService.CreateAsync(dto.Content);
+                var result = await ConfigBackupAppService.CreateAsync(input);
                 Items.Add(result);
             }
             else
@@ -61,7 +67,7 @@ namespace NRSoft.CloudBackup.Blazor.Pages
                 {
                     Items.Remove(oldItem);
                     await ConfigBackupAppService.DeleteAsync(oldItem.Id);
-                    var result = await ConfigBackupAppService.CreateAsync(dto.Content);
+                    var result = await ConfigBackupAppService.CreateAsync(input);
                 }
 
             }

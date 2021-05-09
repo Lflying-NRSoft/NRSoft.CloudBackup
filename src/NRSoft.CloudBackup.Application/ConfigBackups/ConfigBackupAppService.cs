@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 
 namespace NRSoft.CloudBackup.ConfigBackups
@@ -16,16 +17,22 @@ namespace NRSoft.CloudBackup.ConfigBackups
             _configBackupRepository = configBackupRepository;
         }
 
-        public async Task<ConfigBackupDto> CreateAsync(string text)
+        public async Task<ConfigBackupDto> CreateAsync(CreateUpdateConfigBackupDto input)
         {
-            var backup = await _configBackupRepository.InsertAsync(
-                new ConfigBackup { Content = text }
-            );
-
-            return new ConfigBackupDto
+            //await CheckCreatePolicyAsync();
+            var entity = ObjectMapper.Map<CreateUpdateConfigBackupDto, ConfigBackup>(input);
+            if (entity is IEntity<Guid> entityWithGuidId && entityWithGuidId.Id == Guid.Empty)
             {
-                Content = backup.Content
-            };
+                EntityHelper.TrySetId(
+                    entityWithGuidId,
+                    () => GuidGenerator.Create(),
+                    true
+                );
+            }
+
+            await _configBackupRepository.InsertAsync(entity, autoSave: true);
+
+            return ObjectMapper.Map<ConfigBackup, ConfigBackupDto>(entity);
         }
 
         public async Task DeleteAsync(Guid id)
@@ -39,6 +46,7 @@ namespace NRSoft.CloudBackup.ConfigBackups
             return items
                 .Select(item => new ConfigBackupDto
                 {
+                    Id = item.Id,
                     Code = item.Code,
                     Name = item.Name,
                     Content = item.Content

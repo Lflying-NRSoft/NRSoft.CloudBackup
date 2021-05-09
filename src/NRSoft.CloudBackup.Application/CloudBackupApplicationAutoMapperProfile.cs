@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NRSoft.CloudBackup.ConfigBackups;
 
 namespace NRSoft.CloudBackup
 {
@@ -6,9 +7,8 @@ namespace NRSoft.CloudBackup
     {
         public CloudBackupApplicationAutoMapperProfile()
         {
-            /* You can configure your AutoMapper mapping configuration here.
-             * Alternatively, you can split your mapping configurations
-             * into multiple profile classes for a better organization. */
+            CreateMap<ConfigBackup, ConfigBackupDto>();
+            CreateMap<CreateUpdateConfigBackupDto, ConfigBackup>();
         }
     }
 }

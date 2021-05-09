@@ -8,7 +8,7 @@ namespace NRSoft.CloudBackup.ConfigBackups
     public interface IConfigBackupAppService : IApplicationService
     {
         Task<List<ConfigBackupDto>> GetListAsync();
-        Task<ConfigBackupDto> CreateAsync(string text);
+        Task<ConfigBackupDto> CreateAsync(CreateUpdateConfigBackupDto input);
         Task DeleteAsync(Guid id);
     }
 }
