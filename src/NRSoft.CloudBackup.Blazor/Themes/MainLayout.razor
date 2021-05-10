@@ -4,9 +4,8 @@
         IsFullSide="@IsFullSide" IsFixedHeader="@IsFixedHeader" IsFixedFooter="@IsFixedFooter" ShowFooter="@ShowFooter"
         Menus="@Menus" UseTabSet="@UseTabSet" AdditionalAssemblies="new[] { GetType().Assembly }" class="@Theme">
     <Header>
-        <span class="ml-3 flex-sm-fill d-none d-sm-block">Bootstrap of Blazor</span>
-        <img src="_content/BootstrapBlazorApp.Shared/images/Argo.png" class="layout-avatar-right" />
-        <span class="mx-3 d-none d-sm-block">超级管理员</span>
+        <span class="ml-3 flex-sm-fill d-none d-sm-block">这里可以放置一级菜单</span>
+        <NavToolbar />
         <div class="layout-drawer" @onclick="@(e => IsOpen = !IsOpen)"><i class="fa fa-gears"></i></div>
     </Header>
     <Side>

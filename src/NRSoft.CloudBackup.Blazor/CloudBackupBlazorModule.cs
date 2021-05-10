@@ -9,6 +9,7 @@ using NRSoft.CloudBackup.Blazor.Themes;
 using System;
 using System.Net.Http;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
+using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
 using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme;
 using Volo.Abp.Autofac.WebAssembly;
 using Volo.Abp.AutoMapper;
@@ -42,6 +43,11 @@ namespace NRSoft.CloudBackup.Blazor
             ConfigureUI(builder);
             ConfigureMenu(context);
             ConfigureAutoMapper(context);
+
+            Configure<AbpToolbarOptions>(options =>
+            {
+                options.Contributors.Add(new CloudBackupToolbarContributor());
+            });
         }
 
         private void ConfigureRouter(ServiceConfigurationContext context)

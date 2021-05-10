@@ -8,6 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="Pages\Authentication.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Blazorise.Bootstrap" Version="0.9.3.5" />
 		<PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3.5" />
 		<PackageReference Include="BootstrapBlazor" Version="5.0.29" />
