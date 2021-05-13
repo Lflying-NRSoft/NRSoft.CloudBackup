@@ -1,6 +1,5 @@
 ﻿using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
-using IdentityModel;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +9,6 @@ using System;
 using System.Net.Http;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
-using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme;
 using Volo.Abp.Autofac.WebAssembly;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Identity.Blazor.WebAssembly;
@@ -18,13 +16,14 @@ using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.UI.Navigation;
+using Microsoft.Extensions.DependencyInjection;
+using IdentityModel;
 
 namespace NRSoft.CloudBackup.Blazor
 {
     [DependsOn(
         typeof(AbpAutofacWebAssemblyModule),
         typeof(CloudBackupHttpApiClientModule),
-        typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule),
         typeof(AbpIdentityBlazorWebAssemblyModule),
         typeof(AbpTenantManagementBlazorWebAssemblyModule),
         typeof(AbpSettingManagementBlazorWebAssemblyModule)

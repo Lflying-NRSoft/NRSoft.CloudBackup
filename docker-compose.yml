@@ -1,0 +1,98 @@
+version: '3.7'
+      
+services:
+  redis:
+    image: redis:5.0.8-alpine
+    container_name: redis
+    restart: always
+    command: --requirepass 123456 --appendonly yes
+    ports:
+      - 6379:6379
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./redis_data:/data
+    networks:
+        jsmart:
+        
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    privileged: true
+    environment:
+      - MYSQL_ROOT_PASSWORD=jiaxing@admin
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - jsmart
+      
+      
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    restart: always
+    ports:
+      - "40590:9000"
+    privileged: true
+    environment:
+      - MINIO_ACCESS_KEY=admin
+      - MINIO_SECRET_KEY=App123456
+      - TZ=Asia/Shanghai
+    volumes: 
+      - "./minio_data:/data"
+    command: server /data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+    networks:
+      - jsmart   
+
+  jiaxing-admin:
+    image: registry.cn-shanghai.aliyuncs.com/nrsoft/jiaxing-admin:develop
+    container_name: jiaxing-admin
+    restart: always
+    environment:      
+      - apihost=http://121.43.133.175:9010
+      - TZ=Asia/Shanghai
+    ports:
+      - "8081:8081"
+    networks:
+      - jsmart
+      
+  backapi:
+    image: registry.cn-shanghai.aliyuncs.com/nrsoft/jiaxing:latest
+    container_name: backapi
+    restart: always
+    environment:      
+      - SPRING_PROFILES_ACTIVE=prd
+      - TZ=Asia/Shanghai    
+    ports:
+      - "9010:9010"
+    networks:
+      - jsmart
+      
+  miniapi:
+    image: registry.cn-shanghai.aliyuncs.com/nrsoft/jsmart-miniapi:latest
+    container_name: miniapi
+    restart: always
+    environment:     
+      - SPRING_PROFILES_ACTIVE=prd    
+      - TZ=Asia/Shanghai    
+    ports:
+      - "9000:9000"
+    networks:
+      - jsmart
+
+    
+networks:
+    jsmart:
+        external: true
+      
+      
+      

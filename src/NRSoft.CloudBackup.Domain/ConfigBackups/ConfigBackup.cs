@@ -19,5 +19,10 @@ namespace NRSoft.CloudBackup.ConfigBackups
         /// 配置文件备份的内容
         /// </summary>
         public string Content { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public string Status { get; set; }
     }
 }

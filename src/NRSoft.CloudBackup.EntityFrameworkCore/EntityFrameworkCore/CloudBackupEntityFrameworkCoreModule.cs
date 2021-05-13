@@ -45,7 +45,8 @@ namespace NRSoft.CloudBackup.EntityFrameworkCore
             {
                 /* The main point to change your DBMS.
                  * See also CloudBackupMigrationsDbContextFactory for EF Core tooling. */
-                options.UseSqlServer();
+                //options.UseSqlServer();
+                options.UseMySQL();
             });
         }
     }

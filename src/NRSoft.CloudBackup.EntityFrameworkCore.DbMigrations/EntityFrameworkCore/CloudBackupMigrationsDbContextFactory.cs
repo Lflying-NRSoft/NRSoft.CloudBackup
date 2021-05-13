@@ -16,7 +16,8 @@ namespace NRSoft.CloudBackup.EntityFrameworkCore
             var configuration = BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<CloudBackupMigrationsDbContext>()
-                .UseSqlServer(configuration.GetConnectionString("Default"));
+                //.UseSqlServer(configuration.GetConnectionString("Default"));
+                .UseMySql(configuration.GetConnectionString("Default"), ServerVersion.FromString("8.0.21-mysql"));
 
             return new CloudBackupMigrationsDbContext(builder.Options);
         }
