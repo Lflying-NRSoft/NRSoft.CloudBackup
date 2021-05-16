@@ -14,7 +14,7 @@ services:
     volumes:
       - ./redis_data:/data
     networks:
-        jsmart:
+        nrsoft:
         
   mysql:
     image: mysql:5.7
@@ -24,12 +24,12 @@ services:
       - "3306:3306"
     privileged: true
     environment:
-      - MYSQL_ROOT_PASSWORD=jiaxing@admin
+      - MYSQL_ROOT_PASSWORD=App1234#
       - TZ=Asia/Shanghai
     volumes:
       - ./mysql_data:/var/lib/mysql
     networks:
-      - jsmart
+      - nrsoft
       
       
   minio:
@@ -51,47 +51,10 @@ services:
       options:
         max-size: "1m"
     networks:
-      - jsmart   
-
-  jiaxing-admin:
-    image: registry.cn-shanghai.aliyuncs.com/nrsoft/jiaxing-admin:develop
-    container_name: jiaxing-admin
-    restart: always
-    environment:      
-      - apihost=http://121.43.133.175:9010
-      - TZ=Asia/Shanghai
-    ports:
-      - "8081:8081"
-    networks:
-      - jsmart
-      
-  backapi:
-    image: registry.cn-shanghai.aliyuncs.com/nrsoft/jiaxing:latest
-    container_name: backapi
-    restart: always
-    environment:      
-      - SPRING_PROFILES_ACTIVE=prd
-      - TZ=Asia/Shanghai    
-    ports:
-      - "9010:9010"
-    networks:
-      - jsmart
-      
-  miniapi:
-    image: registry.cn-shanghai.aliyuncs.com/nrsoft/jsmart-miniapi:latest
-    container_name: miniapi
-    restart: always
-    environment:     
-      - SPRING_PROFILES_ACTIVE=prd    
-      - TZ=Asia/Shanghai    
-    ports:
-      - "9000:9000"
-    networks:
-      - jsmart
-
+      - nrsoft   
     
 networks:
-    jsmart:
+    nrsoft:
         external: true
       
       

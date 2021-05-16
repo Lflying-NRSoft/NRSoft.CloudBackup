@@ -1,14 +1,13 @@
-﻿using Blazorise.Bootstrap;
-using Blazorise.Icons.FontAwesome;
+﻿using IdentityModel;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NRSoft.CloudBackup.Blazor.Menus;
-using NRSoft.CloudBackup.Blazor.Themes;
+using NRSoft.WebAssembly.BootstapBlazorTheme;
+using NRSoft.WebAssembly.BootstapBlazorTheme.Themes;
 using System;
 using System.Net.Http;
-using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
-using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
+using Volo.Abp.AspNetCore.Components.WebAssembly.Theming.Routing;
 using Volo.Abp.Autofac.WebAssembly;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Identity.Blazor.WebAssembly;
@@ -16,8 +15,6 @@ using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.UI.Navigation;
-using Microsoft.Extensions.DependencyInjection;
-using IdentityModel;
 
 namespace NRSoft.CloudBackup.Blazor
 {
@@ -26,7 +23,8 @@ namespace NRSoft.CloudBackup.Blazor
         typeof(CloudBackupHttpApiClientModule),
         typeof(AbpIdentityBlazorWebAssemblyModule),
         typeof(AbpTenantManagementBlazorWebAssemblyModule),
-        typeof(AbpSettingManagementBlazorWebAssemblyModule)
+        typeof(AbpSettingManagementBlazorWebAssemblyModule),
+        typeof(NRSoftWebAssemblyBootstapBlazorThemeModule)
     )]
     public class CloudBackupBlazorModule : AbpModule
     {
@@ -37,16 +35,11 @@ namespace NRSoft.CloudBackup.Blazor
 
             ConfigureAuthentication(builder);
             ConfigureHttpClient(context, environment);
-            ConfigureBlazorise(context);
+            //ConfigureBlazorise(context);
             ConfigureRouter(context);
             ConfigureUI(builder);
             ConfigureMenu(context);
             ConfigureAutoMapper(context);
-
-            Configure<AbpToolbarOptions>(options =>
-            {
-                options.Contributors.Add(new CloudBackupToolbarContributor());
-            });
         }
 
         private void ConfigureRouter(ServiceConfigurationContext context)
@@ -67,12 +60,12 @@ namespace NRSoft.CloudBackup.Blazor
 
         private void ConfigureBlazorise(ServiceConfigurationContext context)
         {
-            context.Services
-                .AddBootstrapProviders()
-                .AddFontAwesomeIcons();
+            //context.Services
+            //    .AddBootstrapProviders()
+            //    .AddFontAwesomeIcons();
 
-            // 添加本行代码
-            context.Services.AddBootstrapBlazor();
+            //// 添加本行代码
+            //context.Services.AddBootstrapBlazor();
         }
 
         private static void ConfigureAuthentication(WebAssemblyHostBuilder builder)

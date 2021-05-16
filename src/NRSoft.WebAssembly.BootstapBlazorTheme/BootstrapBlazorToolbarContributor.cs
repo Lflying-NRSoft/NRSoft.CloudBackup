@@ -1,22 +1,15 @@
-﻿using NRSoft.CloudBackup.Blazor.Themes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using NRSoft.WebAssembly.BootstapBlazorTheme.Themes;
 using System.Threading.Tasks;
-using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
+using Volo.Abp.AspNetCore.Components.WebAssembly.Theming.Toolbars;
 
-namespace NRSoft.CloudBackup.Blazor
+namespace NRSoft.WebAssembly.BootstapBlazorTheme
 {
-    /// <summary>
-    /// 右上角工具栏的定义类（Contributor）
-    /// </summary>
-    public class CloudBackupToolbarContributor : IToolbarContributor
+    public class BootstrapBlazorToolbarContributor : IToolbarContributor
     {
         public Task ConfigureToolbarAsync(IToolbarConfigurationContext context)
         {
             if (context.Toolbar.Name == StandardToolbars.Main)
             {
-                context.Toolbar.Items.Clear();
                 context.Toolbar.Items.Add(new ToolbarItem(typeof(LanguageSwitch)));
                 context.Toolbar.Items.Add(new ToolbarItem(typeof(LoginDisplay)));
             }

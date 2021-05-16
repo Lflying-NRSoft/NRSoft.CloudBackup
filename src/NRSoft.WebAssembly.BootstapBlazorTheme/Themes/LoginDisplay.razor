@@ -1,0 +1,68 @@
+﻿@using Microsoft.Extensions.Localization
+@using Volo.Abp.Users
+@using Volo.Abp.MultiTenancy
+@using global::Localization.Resources.AbpUi
+@inject ICurrentUser CurrentUser
+@inject ICurrentTenant CurrentTenant
+@inject IJSRuntime JsRuntime
+@inject NavigationManager Navigation
+@inject IStringLocalizer<AbpUiResource> UiLocalizer
+<AuthorizeView>
+    <Authorized>
+        <div class="dropdown userinfo">
+            <div data-toggle="dropdown" class="dropdown-toggle shadow-default">
+                @*<img alt="" src="@Icon.ToBlazorLink()" />*@
+                @if (CurrentTenant.Name != null)
+                {
+                    <span class="username text-truncate d-inline-block"><i>@CurrentTenant.Name</i>\@CurrentUser.UserName</span>
+                }
+                else
+                {
+                    <span class="username text-truncate d-inline-block">@CurrentUser.UserName</span>
+                }
+            </div>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-item">
+                    <div class="d-flex flex-fill align-items-center">
+                        @*<img src="@Icon.ToBlazorLink()">*@
+                        <div class="flex-fill">
+                            <div class="username text-truncate">@CurrentUser.UserName</div>
+                            <div>登录名：@CurrentUser.UserName</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-item">
+                    <a href="@("~/Admin/Profiles")"><i class=" fa fa-suitcase"></i>个人中心</a>
+                    <a href="@("~/Admin/Index")"><i class="fa fa-cog"></i>设置</a>
+                    <a href="@("~/Admin/Notifications")"><i class="fa fa-bell"></i>通知<span id="logoutNoti" class="badge badge-pill badge-success"></span></a>
+                </div>
+                <div class="dropdown-item">
+                    <a href="Account/Logout"><i class="fa fa-key"></i>注销</a>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <a class="nav-link" href="authentication/login">@UiLocalizer["Login"]</a>
+    </NotAuthorized>
+</AuthorizeView>
+@code{
+
+    private async Task NavigateToAsync(string uri, string target = null)
+    {
+        if (target == "_blank")
+        {
+            await JsRuntime.InvokeVoidAsync("open", uri, target);
+        }
+        else
+        {
+            Navigation.NavigateTo(uri);
+        }
+    }
+
+    private async Task BeginSignOut()
+    {
+        //await SignOutManager.SetSignOutState();
+        await NavigateToAsync("authentication/logout");
+    }
+}

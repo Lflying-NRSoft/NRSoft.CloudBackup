@@ -39,6 +39,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NRSoft.CloudBackup.HttpApi.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NRSoft.CloudBackup.Blazor", "src\NRSoft.CloudBackup.Blazor\NRSoft.CloudBackup.Blazor.csproj", "{27B2DDC7-8B75-4322-A312-25419C15D9D8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volo.Abp.AspNetCore.Components.WebAssembly.Theming", "src\Volo.Abp.AspNetCore.Components.WebAssembly.Theming\Volo.Abp.AspNetCore.Components.WebAssembly.Theming.csproj", "{FA239908-A16A-48C6-AD96-BFE1252FC94B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NRSoft.WebAssembly.BootstapBlazorTheme", "src\NRSoft.WebAssembly.BootstapBlazorTheme\NRSoft.WebAssembly.BootstapBlazorTheme.csproj", "{47E61799-5727-4DB1-91CD-46E626A5911F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +113,14 @@ Global
 		{27B2DDC7-8B75-4322-A312-25419C15D9D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27B2DDC7-8B75-4322-A312-25419C15D9D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27B2DDC7-8B75-4322-A312-25419C15D9D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA239908-A16A-48C6-AD96-BFE1252FC94B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA239908-A16A-48C6-AD96-BFE1252FC94B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA239908-A16A-48C6-AD96-BFE1252FC94B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA239908-A16A-48C6-AD96-BFE1252FC94B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47E61799-5727-4DB1-91CD-46E626A5911F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E61799-5727-4DB1-91CD-46E626A5911F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E61799-5727-4DB1-91CD-46E626A5911F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E61799-5727-4DB1-91CD-46E626A5911F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +142,8 @@ Global
 		{AA94D832-1CCC-4715-95A9-A483F23A1A5D} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{748584B1-BA69-4F6A-81AA-F4BDE6BCE29D} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{27B2DDC7-8B75-4322-A312-25419C15D9D8} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
+		{FA239908-A16A-48C6-AD96-BFE1252FC94B} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
+		{47E61799-5727-4DB1-91CD-46E626A5911F} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}
