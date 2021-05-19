@@ -1,4 +1,5 @@
-﻿@using Microsoft.Extensions.Localization
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Microsoft.Extensions.Localization
 @using Volo.Abp.Users
 @using Volo.Abp.MultiTenancy
 @using global::Localization.Resources.AbpUi
@@ -6,6 +7,7 @@
 @inject ICurrentTenant CurrentTenant
 @inject IJSRuntime JsRuntime
 @inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
 @inject IStringLocalizer<AbpUiResource> UiLocalizer
 <AuthorizeView>
     <Authorized>
@@ -37,7 +39,7 @@
                     <a href="@("~/Admin/Notifications")"><i class="fa fa-bell"></i>通知<span id="logoutNoti" class="badge badge-pill badge-success"></span></a>
                 </div>
                 <div class="dropdown-item">
-                    <a href="Account/Logout"><i class="fa fa-key"></i>注销</a>
+                    <Button @onclick="@BeginSignOut" Color="Color.Primary"><i class="fa fa-key"></i>注销</Button>
                 </div>
             </div>
         </div>
@@ -62,7 +64,7 @@
 
     private async Task BeginSignOut()
     {
-        //await SignOutManager.SetSignOutState();
+        await SignOutManager.SetSignOutState();
         await NavigateToAsync("authentication/logout");
     }
 }
