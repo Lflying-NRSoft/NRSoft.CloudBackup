@@ -1,9 +1,11 @@
 ﻿using BootstrapBlazor.Components;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -27,6 +29,13 @@ namespace NRSoft.WebAssembly.BootstapBlazorTheme.Themes
 
         private bool UseTabSet { get; set; } = true;
 
+        [NotNull]
+        private RenderFragment? NotAuthorized { get; set; }
+
+        [Inject]
+        [NotNull]
+        private AuthenticationStateProvider? AuthenticationStateProvider { get; set; }
+
         private string Theme { get; set; } = "color1";
 
         private bool IsOpen { get; set; }
@@ -46,12 +55,47 @@ namespace NRSoft.WebAssembly.BootstapBlazorTheme.Themes
             //NavigationManager.LocationChanged -= OnLocationChanged;
         }
 
+        /// <summary>
+        /// OnInitialized 方法
+        /// </summary>
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            NotAuthorized = builder =>
+            {
+                builder.OpenComponent<RedirectToLogin>(0);
+                builder.CloseComponent();
+            };
+        }
+
         protected async override Task OnInitializedAsync()
         {
             AdditionalAssemblies = RouterOptions.Value.AdditionalAssemblies.ToList();
             AdditionalAssemblies.Add(RouterOptions.Value.AppAssembly);
 
             Menus = await GetIconSideMenuItemsAsync();
+
+            //await base.OnInitializedAsync();
+            // 通过当前登录名获取显示名称
+            var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            if (state.User.Identity?.IsAuthenticated ?? false)
+            {
+                //UserName = state.User.Identity.Name;
+                //DisplayName = UserHelper.RetrieveUserByUserName(UserName)?.DisplayName;
+
+                // 模拟异步线程切换，正式代码中删除此行代码
+                await Task.Yield();
+
+                //// 菜单获取可以通过数据库获取，此处为示例直接拼装的菜单集合
+                //TabItemTextDictionary = new()
+                //{
+                //    [""] = "Index"
+                //};
+
+                //// 获取登录用户菜单
+                //Menus = GetMenus();
+            }
         }
 
         private async Task<List<MenuItem>> GetIconSideMenuItemsAsync()
